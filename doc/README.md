@@ -1,2 +1,2 @@
-# sfu-884
-cmpt884 course project
+# Doc directory
+Our final report goes here

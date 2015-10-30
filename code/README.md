@@ -1,2 +1,2 @@
-# sfu-884
-cmpt884 course project
+# Code directory
+Our code goes here

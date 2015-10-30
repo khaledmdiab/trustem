@@ -1,2 +1,2 @@
-# sfu-884
-cmpt884 course project
+# Resources directory
+Let's put any resources here (references, papers, sample code etc...)

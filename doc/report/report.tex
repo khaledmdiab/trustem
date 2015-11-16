@@ -1,0 +1,79 @@
+
+\documentclass[11pt, onecolumn]{IEEEtran} 
+% IEEE INFOCOM 
+%\documentclass[10pt, conference, letterpaper]{IEEEtran}
+
+% the default nsl packages
+\usepackage{epsfig}
+\usepackage{times}
+\usepackage{subcaption}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{psfrag}
+\usepackage{array}
+\usepackage{mdwmath} % part of Mark Wooding's powerful
+\usepackage{mdwtab}  % tools for math, tables, ...
+\usepackage{multirow}
+\usepackage{verbatim}
+\usepackage{color}
+
+
+% added packages
+\usepackage{paralist} % for inparaenum
+\usepackage{algorithm}% http://ctan.org/pkg/algorithms
+\usepackage{algpseudocode}
+\usepackage{xspace} % using space in newcommand
+\usepackage{cleveref} % multi-label ref
+
+
+\input{./macros}   % some pre-defined macros, originally from nsl
+\input{./my_defs}   % some definitions
+\input{./alg_patch} % adds vertical line to algorithmic environment, comment this line if the vertical lines are not required
+
+% rename the algorithms Ensure and Require to Input and Output
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\graphicspath{{figs/}}
+
+\begin{document}
+\nocite{*}
+\title{Report Title Goes Here}
+
+\author{\IEEEauthorblockN{Khaled Diab}\\
+\IEEEauthorblockA{School of Computing Science\\
+Simon Fraser University\\
+BC, Canada}
+}
+
+\date{}
+\maketitle
+
+% This template is inspired by Dr. Hefeeda's instructions for writing our reports and publications, the order of sections follows a normal thinking model:
+% - After the intro and related work, we systematically describe the "system model" or "system design". Based on the contribution, this can be abstract to define a model or specific to describe real system design.
+% - Problem: we formally define the problem here, to make it clear for the reader what we are trying to solve. Figures and charts to motivate the problem are essential.
+% - Solution: is often the algorithm to solve the problem alongside its analysis. Illustrative examples with figures are important.
+% - Evaluation: is a major part especially if it's a system publication: evaluation setup, scenarios and results should be mentioned very clear. (1) Analysis of the results and (2) referal to the solution guarantees (if any) are very appreciated here.
+% - Discussion: is essential to discuss some shortcomings and practical issues. Solution guidelines to solve shortcomings should mentioned here as well.
+% - Conclusions: conclude your work and point to future work. Future work is important factor as well since it shows that you have a good research plan in mind for practical issues.
+
+\input{abstract}
+\input{introduction}
+\input{related}
+\input{model}
+\input{problem}
+\input{solution}
+\input{evaluation}
+\input{discussion}
+\input{conclusion}
+
+\bibliographystyle{IEEEtran}   
+% refs.bib: should contain all references. One bib file that rules them all :)
+\bibliography{./refs}    
+
+\end{document}
+
+

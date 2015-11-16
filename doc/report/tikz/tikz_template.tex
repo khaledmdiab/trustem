@@ -1,0 +1,12 @@
+\documentclass[tikz]{standalone}
+\usepackage{xspace}
+\input{../my_defs} % make sure that your defs are unified across Tikz files
+\input{tikz_macros}
+\usetikzlibrary{shapes,arrows,shadows,positioning,matrix,calc,fit,backgrounds}
+\usetikzlibrary{decorations.pathmorphing,decorations.markings}
+\usetikzlibrary{patterns}
+\begin{document}
+\begin{tikzpicture}[scale=0.8, transform shape]
+\node at(0,0) {Hello From Tikz};
+\end{tikzpicture}
+\end{document}

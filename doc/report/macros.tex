@@ -1,0 +1,277 @@
+\catcode`"=\active
+\gdef"#1"{{\sf #1}}
+
+\newcommand{\handout}[2]{
+University of Texas at Austin\hfill{#2}
+\newline
+Department of Computer Science
+\newline
+Probabilistic Methods, Spring 1992
+\newline
+Handout \##1
+\newline
+}
+
+\newcommand{\lecture}[4]{
+University of Texas at Austin\hfill{#2}
+\newline
+Department of Computer Science
+\newline
+Probabilistic Methods, Spring 1992\hfill Lecturer: {#3}
+\newline
+Lecture \##1\hfill Scribe: {#4}
+\newline
+}
+
+%\setlength{\parskip}{0.85ex}
+%\setlength{\parindent}{0pt}
+
+\newcommand{\id}[1]{{\it #1}}
+
+\newcommand{\Eqnum}[1]{(\ref{eqn:#1})}
+\newcommand{\Eqn}[1]{Equation~\Eqnum{#1}}
+\newtheorem{Convention}{Convention}
+\newtheorem{Definition}{Definition}
+\newtheorem{Theorem}{Theorem}
+\newtheorem{Example}{Example}[section]
+\newtheorem{Remark}{Remark}
+\newtheorem{Notation}{Notation}
+\newtheorem{F}{Fact}
+\newtheorem{Lemma}{Lemma}
+\newtheorem{Corol}{Corollary}[Theorem]
+\newtheorem{Lcorol}{Corollary}[Lemma]
+\newtheorem{Proposition}{Proposition}
+
+%\newenvironment{Proof}{\noindent{\bf Proof: }}{\hfill$\Box$}
+\newenvironment{Invariant}[1]{\begin{quote}{Invariant\em#1\/}:}{\end{quote}}
+%\newenvironment{Convention}[1]{\begin{quote}{Convention\em#1\/}:}{\end{quote}}
+%\newcommand{\qed}{\protect\raisebox{.3ex}{\framebox[.5em]{\rule{0em}{.6ex}}}}
+
+%\newcommand{\qed}{\nobreak \ifvmode \relax \else
+%\ifdim\lastskip<1.5em \hskip-\lastskip
+%\hskip1.5em plus0em minus0.5em \fi \nobreak
+%\vrule height0.75em width0.5em depth0.25em\fi}
+
+%%%% another environment for proof
+%\newenvironment{proof}[1][Proof]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{definition}[1][Definition]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{example}[1][Example]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{remark}[1][Remark]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+
+\newcommand{\equals}{\stackrel{\rm def}{=}}
+\newcommand{\ceil}[1]{\left\lceil  #1 \right\rceil}
+\newcommand{\floor}[1]{\left\lfloor  #1 \right\rfloor}
+
+\newcommand{\bin}[2]{\mathop{\mbox{\rm bin}}(#1,#2)}
+\newcommand{\smallbin}[2]{\mathop{\mbox{\scriptsize{\rm bin}}}(#1,#2)}
+\newcommand{\expectation}[1]{\mathop{\mbox{\rm E}}(#1)}
+\newcommand{\variance}[1]{\mathop{\mbox{\rm Var}}(#1)}
+\newcommand{\covariance}[2]{\mathop{\mbox{\rm Cov}}(#1,#2)}
+
+\newcommand{\polyTime}{{\bf P }}
+\newcommand{\NP}{{\bf NP }}
+\newcommand{\coNP}{{\bf co-NP }}
+\newcommand{\PSPACE}{{\bf PSPACE }}
+\newcommand{\RNC}{{\bf RNC }}
+\newcommand{\R}{{\bf R }}
+\newcommand{\RP}{{\bf RP }}
+\newcommand{\coR}{{\bf co-R }}
+\newcommand{\coRP}{{\bf co-RP }}
+\newcommand{\ZPP}{{\bf ZPP }}
+\newcommand{\BPP}{{\bf BPP }}
+\newcommand{\PP}{{\bf PP }}
+
+\newcommand{\Iff}{\leftrightarrow}
+\newcommand{\IFF}{\Longleftrightarrow}
+\newcommand{\imp}{\rightarrow}
+\newcommand{\Imp}{\Rightarrow}
+\newcommand{\IMP}{\Longrightarrow}
+
+\newcommand{\ints}{{\bf Z}}
+\newcommand{\nats}{{\bf N}}
+\newcommand{\reals}{{\bf R}}
+\newcommand{\nTuples}{\ints^n}
+
+
+%\renewcommand{\algorithmiccomment}[1]{/* #1 */}
+%\renewcommand{\algorithmicloop}{\textbf{begin}}
+%\renewcommand{\algorithmicendloop}{\textbf{end}}
+
+\def\>{\hspace{0.27cm}}
+%\def\>{\hspace{0.3cm}}
+%\def\>{\hspace{0.5cm}}
+%\def\^{\vspace{-0.5cm}}
+\newcommand{\seprule}{\centerline{\rule{\linewidth}{0.3pt}\vspace{.1in}}}
+\newcommand{\seprulelast}{\vspace{-0.1in}\centerline{\rule{\linewidth}{0.3pt}\vspace{-0.1in}}}
+
+
+\newcommand{\Algorithm}[1]{\bigskip\noindent{\bf Algorithm }
+        {#1}\vspace{-2mm}\par\nobreak}
+\newcommand{\Protocol}[1]{\bigskip\noindent{}
+        {\large \sf \bf {#1}}\vspace{.25cm}\par\nobreak}
+
+\def\bs{\boldsymbol}
+
+\def\bbegin{{\bf begin }} 
+\def\bbreak{{\bf break}} 
+\def\bfor{{\bf for }} 
+\def\bstep{{\bf step }}
+\def\bdo{{\bf do }}
+\def\bgoto{{\bf goto }}
+\def\bif{{\bf if }} 
+\def\bfi{{\bf fi}}
+\def\bthen{{\bf then }} 
+\def\belse{{\bf else }}
+\def\belsif{{\bf elsif }}
+\def\belif{{\bf elif }}
+\def\belseif{{\bf elif }}
+\def\bboolean{{\bf boolean }}
+\def\bwhile{{\bf while }}
+\def\bendwhile{{\bf end while}}
+\def\brepeat{{\bf repeat }}
+\def\btimes{{\bf times}}
+\def\buntil{{\bf until }}
+\def\bend{{\bf end }} 
+\def\bendif{{\bf end if }} 
+\def\band{{\bf and }} 
+\def\bor{{\bf or }} 
+\def\bcor{{\bf cor }} 
+\def\bcand{{\bf cand }} 
+\def\bco{{\bf co }} 
+\def\boc{{\bf oc}} 
+\def\bod{{\bf od}}
+\def\bto{{\bf to }}
+\def\bdownto{{\bf downto }}
+\def\balgorithm{{\bf algorithm }}
+\def\bprocedure{{\bf procedure }}
+\def\bfunction{{\bf function }}
+\def\bint{{\bf int }}
+\def\bloop{{\bf loop}}
+\def\bexitwhen{{\bf exit when }}
+\def\btrue{{\bf true}}
+\def\bfalse{{\bf false}}
+\def\bassert{{\bf assert }}
+\def\breturn{{\bf return }}
+\def\bbreak{{\bf break}}
+\def\bcase{{\bf case}}
+\def\bat{{\bf at }}
+\def\bnil{{\bf nil }}
+\def\bnull{{\bf null }}
+\def\bnot{{\bf not }}
+\def\bvar{{\bf var }}
+\def\blet{{\bf let }}
+\def\bendfor{{\bf endfor }}
+\def\bforeach{{\bf foreach }}
+\def\define{\stackrel{\rm def}{=}}
+\def\bswitch{{\bf swicth }}
+
+\def\cbbegin{\color{magenta} begin \color{black}} 
+\def\cbfor{\color{magenta} for \color{black}} 
+\def\cbstep{\color{magenta} step \color{black}}
+\def\cbdo{\color{magenta} do \color{black}}
+\def\cbif{\color{magenta} if \color{black}} 
+\def\cbfi{\color{magenta} fi\color{black}}
+\def\cbthen{\color{magenta} then \color{black}} 
+\def\cbelse{\color{magenta} else \color{black}}
+\def\cbelsif{\color{magenta} elsif \color{black}}
+\def\cbwhile{\color{magenta} while \color{black}}
+\def\cbendwhile{\color{magenta} end while\color{black}}
+\def\cbrepeat{\color{magenta} repeat \color{black}}
+\def\cbtimes{\color{magenta} times\color{black}}
+\def\cbuntil{\color{magenta} until \color{black}}
+\def\cbend{\color{magenta} end \color{black}} 
+\def\cband{\color{magenta} and \color{black}} 
+\def\cbor{\color{magenta} or \color{black}} 
+\def\cbcor{\color{magenta} cor \color{black}} 
+\def\cbcand{\color{magenta} cand \color{black}} 
+\def\cbco{\color{magenta} co \color{black}} 
+\def\cboc{\color{magenta} oc\color{black}} 
+\def\cbod{\color{magenta} od\color{black}}
+\def\cbto{\color{magenta} to \color{black}}
+\def\cbdownto{\color{magenta} downto \color{black}}
+\def\cbalgorithm{\color{magenta} algorithm \color{black}}
+\def\cbprocedure{\color{magenta} procedure \color{black}}
+\def\cbfunction{\color{magenta} function \color{black}}
+\def\cbloop{\color{magenta} loop\color{black}}
+\def\cbexitwhen{\color{magenta} exit when \color{black}}
+\def\cbtrue{\color{magenta} true\color{black}}
+\def\cbfalse{\color{magenta} false\color{black}}
+\def\cbassert{\color{magenta} assert \color{black}}
+\def\cbreturn{\color{magenta} return\color{black}}
+\def\cbat{\color{magenta} at \color{black}}
+\def\cbnil{\color{magenta} nil\color{black}}
+\def\cbnull{\color{magenta} null\color{black}}
+\def\cbnot{\color{magenta} not \color{black}}
+\def\cbvar{\color{magenta} var \color{black}}
+
+\newcounter{leftindent}
+%\newenvironment{program}{\setcounter{leftindent}{0}\begin{tabbing}\hspace{15ex}\=\hspace{25em}\=\kill\>}{\end{tabbing}}
+\newcommand{\inc}[1]{\addtocounter{leftindent}{#1}\\\>\hspace{\value{leftindent}em}}
+
+\newcommand{\ul}[1]{\underline{#1}}                                             
+\newcommand{\fp}[2]{{\bf #1} {\it #2}}
+\newcommand{\ty}[1]{{\bf #1}}
+\newcommand{\act}[1]{{\sf #1}}
+\newcommand{\cur}[1]{{\em #1}}
+\newcommand{\nm}[1]{{\tt #1}}
+\newcommand{\p}[1]{{\it #1}}
+\newcommand{\val}[1]{{\bf #1}\hspace{1.5in}}
+\newcommand{\rval}[2]{\begin{minipage}[t]{1.5in}{{\bf #1}}\end{minipage} \
+         \begin{minipage}[t]{4.5in}{#2}\end{minipage}
+         \vspace{1.5mm}\newline}                  
+\newcommand{\struct}[2]{\noindent\hspace*{.5in}
+   {\bf struct #1} \{ \newline #2 
+   \hspace*{.5in}\}\newline}
+\newcommand{\typedef}[2]{\noindent\hspace*{.5in}
+   \nm{typedef struct} \{ \newline #2 
+   \hspace*{.5in}\} #1;\newline}
+\newcommand{\mem}[3]{\hspace*{1in}\makebox[1.2in][l]{\nm{#1}}
+   \makebox[1in][l]{\nm{#2}};  /* \nm{#3} */
+   \newline}
+%\newcommand{\tab}[1]{\noindent\hspace*{.5in}#1\newline}
+\newcommand{\xtab}[3]{\begin{minipage}[t]{1in}{#1}\end{minipage} \
+                 \begin{minipage}[t]{2in}{#2}\end{minipage} \
+                 \begin{minipage}[t]{3.75in}{#3}\end{minipage}
+               \vspace{0.05mm}\newline}
+\newcommand{\xtabs}[3]{\begin{minipage}[t]{0.4in}{#1}\end{minipage} \
+                 \begin{minipage}[t]{0.5in}{#2}\end{minipage} \
+                 \begin{minipage}[t]{2.1in}{#3}\end{minipage}
+               \vspace{0.05mm}\newline}
+\newcommand{\xtabl}[3]{\begin{minipage}[t]{0.5in}{#1}\end{minipage} \
+                 \begin{minipage}[t]{0.65in}{#2}\end{minipage} \
+                 \begin{minipage}[t]{4.3in}{#3}\end{minipage}
+               \vspace*{3mm}\newline}
+
+\newcommand{\twofigs}[2]{\begin{minipage}[t]{3.2in}{#1}\end{minipage} \
+          \begin{minipage}[t]{3.2in}{#2}\end{minipage}
+          \vspace{1.5mm}\newline}
+%2.0in
+\newcommand{\twoinch}[1]{\begin{minipage}[t]{1.275in}{#1}\end{minipage}}
+%3.3in
+\newcommand{\threeinch}[1]{\begin{minipage}[t]{2.6in}{#1}\end{minipage}}
+\newcommand{\ltwoinch}[1]{\begin{minipage}[t]{2.0in}{#1}\end{minipage}}
+\newcommand{\lthreeinch}[1]{\begin{minipage}[t]{3.3in}{#1}\end{minipage}}
+
+
+% redefinition of captions
+\long\def\@makecaption#1#2{
+ \vskip 4pt 
+ \@tempdima\hsize
+  \advance\@tempdima -1cm
+ \setbox\@tempboxa\hbox{\helvix #1: #2}
+ \ifdim \wd\@tempboxa >\@tempdima
+     {\advance\leftskip .5cm \advance\rightskip .5cm\helvix\baselineskip -2pt #1: #2\par} % SKF: added baselineskip 
+  \else
+     {\centering \hbox to\@tempdima{\hfil\box\@tempboxa\hfil}}
+ \fi}
+
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\lcm}{lcm}
+
+

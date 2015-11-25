@@ -3,7 +3,6 @@ import os
 import sys
 import mat
 import numpy as np
-import scipy.io as io
 
 __author__ = 'Khaled Diab (kdiab@sfu.ca)'
 

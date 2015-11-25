@@ -5,15 +5,15 @@ author: Tanveer
 
 import numpy as np
 import os
-from gen import DataGen
-from math import sqrt
+from gen import DataGen, EP_RATING, EP_TRUST
 
-EP_RATING = 'rating.mat'
-EP_TRUST = 'trustnetwork.mat'
 
 def matrix_factorization(R, P, Q, K, steps=250, alpha=0.0002, beta=0.02):
     Q = Q.T
     for step in xrange(steps):
+        # make sure we're running something
+        if steps % 10 == 0:
+            print 'MF: step %d out of %d' % (step, steps)
         for i in xrange(len(R)):
             for j in xrange(len(R[i])):
                 if R[i][j] > 0:
@@ -33,65 +33,36 @@ def matrix_factorization(R, P, Q, K, steps=250, alpha=0.0002, beta=0.02):
     return P, Q.T
 
 
+def run_rec(gen, k=100, steps=250, alpha=0.0002, beta=0.02):
+    # merging two matrices
+    uiu_matrix = np.hstack((gen.ui_matrix, gen.uu_matrix))
 
-def rmse(A,B):
-    count=0 
-    summ=0
-    numrows = len(A)
-    numcols = len(A[0])
-    for x in xrange(0, numrows):
-        for y in xrange(0, numcols):
-            if A[x][y] >= 1:
-                summ+= (A[x][y] - B[x][y])**2
-                count=count+1
-    
-    return sqrt(summ/count)
+    N = len(uiu_matrix)
+    M = len(uiu_matrix[0])
+    W = len(gen.ui_matrix)
+    X = len(gen.ui_matrix[0])
+    P = np.random.rand(N, k)
+    Q = np.random.rand(M, k)
 
-
-
-def coverage(A,T):
-    count=0
-    numrows = len(A)
-    numcols = len(A[0])
-    for x in xrange(0, numrows):
-        for y in xrange(0, numcols):
-            if A[x][y] >= T:
-                count=count+1
-    
-    return count/float(A.size)
+    R = uiu_matrix
+    nP, nQ = matrix_factorization(R, P, Q, k, steps=steps, alpha=alpha, beta=beta)
+    mf_results = np.dot(nP, nQ.T)
+    # trimming off the trust part of the matrix
+    mf_user_item_matrix = mf_results[0:W, 0:X]
+    return mf_user_item_matrix
 
 
 if __name__ == '__main__':
-    
-    ip_dir = os.getcwd() #current file directory, keep the mat files in the same place
+    import recstats
+    # current file directory, keep the mat files in the same place
+    ip_dir = os.getcwd()
     rating_file = os.path.join(ip_dir, EP_RATING)
     trust_file = os.path.join(ip_dir, EP_TRUST)
 
     generator = DataGen(rating_file, trust_file)
-    generator.generate()
+    ui_matrix = run_rec(generator, 100)
     
-    uiu_matrix = np.hstack((generator.ui_matrix, generator.uu_matrix)) #merging two matrices
-    
-   
-
-    N = len(uiu_matrix)
-    M = len(uiu_matrix[0])
-    W = len(generator.ui_matrix)
-    X = len(generator.ui_matrix[0])
-    
-    K = 100
-
-    P = np.random.rand(N,K)
-    Q = np.random.rand(M,K)
-
-    R=uiu_matrix
-    
-    nP,nQ = matrix_factorization(R, P, Q, K)
-  
-    Y= np.dot(nP, nQ.T)
-    Z = Y[0:W,0:X]  #trimming off the trust part of the matrix
-    
-    print "RMSE: %f  Coverage: %f " % (rmse(generator.ui_matrix,Z), coverage(Z,1)) 
+    print "RMSE: %f  Coverage: %f " % (recstats.rmse(generator.ui_matrix, ui_matrix), recstats.coverage(ui_matrix, 1))
     
     
     

@@ -1,5 +1,5 @@
 
-\documentclass[11pt, onecolumn]{IEEEtran} 
+\documentclass[11pt, conference, onecolumn]{IEEEtran} 
 % IEEE INFOCOM 
 %\documentclass[10pt, conference, letterpaper]{IEEEtran}
 
@@ -41,34 +41,69 @@
 
 \begin{document}
 \nocite{*}
-\title{Report Title Goes Here}
+\title{TrusTem: Recommendation in Disjoint Trust Networks}
 
-\author{\IEEEauthorblockN{Khaled Diab}\\
-\IEEEauthorblockA{School of Computing Science\\
-Simon Fraser University\\
-BC, Canada}
+\author{\IEEEauthorblockN{Syed Tanveer Jishan}
+\IEEEauthorblockA{Presentation ID 9\\
+Student ID 301279717\\
+sjishan@sfu.ca}
+\and
+\IEEEauthorblockN{ Khaled Diab}
+\IEEEauthorblockA{Presentation ID 5\\
+Student ID 301235653\\
+kdiab@sfu.ca}
 }
 
-\date{}
 \maketitle
 
-% This template is inspired by Dr. Hefeeda's instructions for writing our reports and publications, the order of sections follows a normal thinking model:
-% - After the intro and related work, we systematically describe the "system model" or "system design". Based on the contribution, this can be abstract to define a model or specific to describe real system design.
-% - Problem: we formally define the problem here, to make it clear for the reader what we are trying to solve. Figures and charts to motivate the problem are essential.
-% - Solution: is often the algorithm to solve the problem alongside its analysis. Illustrative examples with figures are important.
-% - Evaluation: is a major part especially if it's a system publication: evaluation setup, scenarios and results should be mentioned very clear. (1) Analysis of the results and (2) referal to the solution guarantees (if any) are very appreciated here.
-% - Discussion: is essential to discuss some shortcomings and practical issues. Solution guidelines to solve shortcomings should mentioned here as well.
-% - Conclusions: conclude your work and point to future work. Future work is important factor as well since it shows that you have a good research plan in mind for practical issues.
+\begin{abstract}
+Collaborative filtering (CF) based recommender systems suggest items to users by employing a similarity metric. With the introduction of online social networks, graph-based approach of recommendation has emerged. This approach assumes trust among users and recommends items based on trust. Although it solves cold start problem in recommendation system, user-item coverage decreases. We argue that one of the causes of coverage issue is the disjointedness of trust network, therefore, an item not rated by anyone in a subgraph cannot be recommended to any user in that subgraph. To solve this problem, we propose TrusTem: a recommendation algorithm that merges user-item and trust domains. We have conducted experiments on real-life dataset and compared TrusTem against state-of-art algorithms. Our experiments demonstrate that TrusTem covers $99.8\%$ of user-item pairs, at cost of reducing accuracy up to $8\%$.
+\end{abstract}
 
-\input{abstract}
-\input{introduction}
-\input{related}
-\input{model}
-\input{problem}
-\input{solution}
-\input{evaluation}
-\input{discussion}
-\input{conclusion}
+\section{Introduction} \label{sec:intro}
+Recommender systems are designed with the goal of suggesting to the users the items that might be of interest to them. With the increase in popularity of online social networks, the trust-based approach to recommendation has emerged.In this approach the friendship/trust network among users is taken into consideration to make recommendations. Trust information can be exploited to get rid of the cold start problem since it is postulated by the sociologists that friends (or people you trust) will have similar attributes, hence similar preferences. However, recommending items that are only rated by direct trusted users can lead to item coverage issue. To put it simply, the items a target user may like but not rated by his friends will not be recommended. Therefore, we use trust propagation metrics to estimate trust between indirect neighbours so that more items can be covered for recommendation. 
+
+We claim that despite propagating trust in the trust network there are still hinderance in the coverage of the items to recommended since the trust networks are usually a set of disjoint subgraphs rather than one large fully connected graph. To verify this claim, we looked into several real life datasets. For instance, we have collected trust information among 7073 users in Epinions.com and found out that it consists of 17 subgraphs. Clearly, trust cannot be propagated from one such subgraph to another since there exist no edges to connect them. In such circumstance, if an item is not rated by any of the user within a subgraph then it cannot be recommended to the target user belonging in that subgraph. Therefore, the issue of item coverage will persist.
+
+In order to propagate trust among the subgraphs we come up with a solution which takes the advantage of the transitive property of the matrix factorization technique. We considered trust to be in the same domain as the item ratings this results in a hybrid trust based recommender system where trust propagation and ratings prediction happens in one go.
+
+LIST THE CONTRIBS HERE
+
+The report is structured as follows. Section 2 surveys trust-based recommenders systems while Section 3 defines the problem of recommendation in disjoint trust networks. Section 4 describes our solution model. We evaluate TruTem in Section 5, before concluding the report in Section 6.
+
+
+\section{Related Work} \label{sec:related}
+MoleTrust [?] considers rating information up to certain depth threshold. In order to propagate trust, a backward exploration is performed. It means that the trust value from user A to user B is the aggregation of trust values between the user A and every other users who directly trust B. Similar to MoleTrust, TidalTrust [?] performs graph search in the trust network to estimate trust value between two indirect neighbours. To infer the trust between two indirect neighbours, TidalTrust first finds the shortest path in the graph from a user A to every other user, then picks a user B before aggregating the trust value from every users to the user B who are direct neighbour of A. Jamali and Ester proposed TrustWalker [?], a random walk model that combines trust-based approach and item-based CF approach. Random walks are made on the trust network to infer items ratings. If the item is not found within a certain depth threshold, item rating is estimated based on similar items. SocialMF [?] is a variant of trust-based recommender system which uses probabilistic matrix factorization approach. The latent features of this model is based on the trust information. The latent feature vector of a particular user depends on the latent feature vectors of all their direct neighbours, which propagates trust recursively.
+To best of our knowledge, trust network disjointedness is not handled previously by any recommendation algorithm. This report defines this problem and proposes a new solution model and algorithm.
+
+\section{Problem Definition} \label{sec:problem}
+
+%\subsection{Item Coverage in Disjoint Trust Network} \label{sec:example}
+
+In order to understand the item coverage issue, we consider the following example. Let's say we have trust information of 15 users of a website. Using the trust information we can represent it as the trust network presented in the Figure 1. We can see that this trust network is a set of two disjoint subgraphs. The orange node has rated the items I1,I2,I3 and the green node has rated the items I1,I2,I4. Now if none of the users in the left subgraph rated the item I4 then we are unable to recommend that particular item to the blue node. This is an example of item coverage issue due to disjoint subgraphs. 
+
+
+\section{TrusTem Model} \label{sec:solution}
+
+\subsection{Graph-based Model}
+As provided in the Figure 1, the orange node and the blue node has similar item preferences even though they belong to different subgraphs. The real life interpretation of this situation can be that these two users have similar item preferences but they do not know each other. Therefore, if we can establish a link between these nodes not only we are recommending trust but more important we are getting rid of the item coverage issue stated in the previous section as the link will work as the bridge between the two subgraphs.
+
+To create such connection between the subgraphs we will introduce the items as nodes within the existing network. The network will no longer be trust network since there will be two different kinds of edges, user to user trust edges and user to item edges if the user has rated the item. In the Figure 2, it is evident that the item I4 can be recommended to the blue node, since it trusts the orange node which is now connected with the green node through the item nodes. 
+
+\subsection{Matrix Representation}
+
+\subsection{Matrix Factorization}
+
+\section{Evaluation}
+We used the Epinions dataset, which includes 7073 users who rated a total of 139,738 different items. In our experiments, we merged the ratings and trust matrices before running the matrix factorization technique. We have set the latent feature value, K = 25. In order to evaluate the result we used two performance metrics, Root Mean Squared-Error (RMSE) and Item Coverage. Both of the performance metrics we only used on the user-item part of the final matrix, since the user-user trust part of the final matrix is usually considered as a resultant of TrusTem.
+
+We present our experiments results and comparison against other state-of-the-art algorithms. Table 1 shows the RMSE and coverage of these models when used on the Epinions.com dataset. 
+As shown in the table, TrusTem has better item coverage than the other models. TrustWalker model has one of the best item coverage which is around $95\%$ whereas our model has around $99\%$ coverage rate. However, we do not know the coverage rate of SocialMF which is a trust-based recommender system using matrix factorization technique. In SocialMF trust propagation happens through latent feature vector of every user and the latent feature of one user depends on his/her direct neighbour in the trust graph, therefore, item coverage issue due to disjointedness will persist. Although TrusTem has improved item coverage rate compared to other methods but in terms of accuracy it is $7\%$ and $8\%$ less than that of the SocialMF and TrustWalker methods respectively.
+
+
+\section{Conclusions}
+In this report, we defined a new problem: in trust-based recommender systems, trust disjointedness is one of the reasons behind item coverage reduction. In order to address this problem we devised a new solution model, based on merging user-item rating and user-user trust domains. Then, we employ matrix factorization to recommend items. We discussed how trust in the merged matrix propagates to recommend items to users belong to different subgraphs. 
+Experiments on real life dataset from Epinions.com demonstrate that TrusTem outperforms existing methods for item coverage. However, it trades off rating accuracy to achieve that. This work suggests several directions for future work. Since items and users are represented in the same latent feature space, it implicitly describes the trust information based on several features. This gives us a notion that trust can be granularized into further details, which may improve the overall accuracy of the system. 
 
 \bibliographystyle{IEEEtran}   
 % refs.bib: should contain all references. One bib file that rules them all :)

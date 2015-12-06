@@ -41,6 +41,8 @@ if __name__ == '__main__':
     uuk = int(arguments['--uuk'])
     generator = DataGen(rating_file, trust_file, uik=uik, uuk=uuk)
     generator.generate()
+    print 'User Item Matrix Size:', generator.ui_matrix.shape
+    print 'User User Matrix Size:', generator.uu_matrix.shape
     results = None
     threshold = None
     if model_name == 'mf':

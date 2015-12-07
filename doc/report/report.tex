@@ -61,11 +61,11 @@ Collaborative filtering (CF) based recommender systems suggest items to users by
 \end{abstract}
 
 \section{Introduction} \label{sec:intro}
-Recommender systems are designed with the goal of suggesting to the users the items that might be of interest to them. With the increase in popularity of online social networks, the trust-based approach to recommendation has emerged.In this approach the friendship/trust network among users is taken into consideration to make recommendations. Trust information can be exploited to get rid of the cold start problem since it is postulated by the sociologists that friends (or people you trust) will have similar attributes, hence similar preferences. However, recommending items that are only rated by direct trusted users can lead to item coverage issue. To put it simply, the items a target user may like but not rated by his friends will not be recommended. Therefore, we use trust propagation metrics to estimate trust between indirect neighbours so that more items can be covered for recommendation. 
+Recommender systems are designed with the goal of suggesting to the users the items that might be of interest to them. With the increase in popularity of online social networks, the trust-based approach to recommendation has emerged.In this approach the friendship/trust network among users is taken into consideration to make recommendations. Trust information can be exploited to get rid of the cold start problem since it is postulated by the sociologists that friends (or people you trust) will have similar attributes, hence similar preferences [1]. However, recommending items that are only rated by direct trusted users can lead to item coverage issue. To put it simply, the items a target user may like but not rated by his friends will not be recommended. Therefore, we take advantage of the transitive property of the trust [2] and use trust propagation metrics to estimate trust between indirect neighbours so that more items can be covered for recommendation. 
 
 We claim that despite propagating trust in the trust network there are still hinderance in the coverage of the items to recommended since the trust networks are usually a set of disjoint subgraphs rather than one large fully connected graph. To verify this claim, we looked into several real life datasets. For instance, we have collected trust information among 7073 users in Epinions.com and found out that it consists of 17 subgraphs. Clearly, trust cannot be propagated from one such subgraph to another since there exist no edges to connect them. In such circumstance, if an item is not rated by any of the user within a subgraph then it cannot be recommended to the target user belonging in that subgraph. Therefore, the issue of item coverage will persist.
 
-In order to propagate trust among the subgraphs we come up with a solution which takes the advantage of the transitive property of the matrix factorization technique. We considered trust to be in the same domain as the item ratings this results in a hybrid trust based recommender system where trust propagation and ratings prediction happens in one go.
+In order to propagate trust among the subgraphs we come up with a solution which takes the advantage of the transitive property of the matrix factorization technique [3]. We considered trust to be in the same domain as the item ratings this results in a hybrid trust based recommender system where trust propagation and ratings prediction happens in one go.
 
 LIST THE CONTRIBS HERE
 
@@ -90,9 +90,14 @@ As provided in the Figure 1, the orange node and the blue node has similar item 
 
 To create such connection between the subgraphs we will introduce the items as nodes within the existing network. The network will no longer be trust network since there will be two different kinds of edges, user to user trust edges and user to item edges if the user has rated the item. In the Figure 2, it is evident that the item I4 can be recommended to the blue node, since it trusts the orange node which is now connected with the green node through the item nodes. 
 
-\subsection{Matrix Representation}
-
-\subsection{Matrix Factorization}
+\subsection{Matrix Representation and Factorization}
+In order to propagate trust and recommend items we have used matrix factorization technique, therefore the user-item ratings information and user to user trust information are represented as matrix. As shown in the Figure 3, we merge both of the matrices which indicates trust information is considered same as rating information. 
+\begin{itemize}
+\item Given K latent features
+\item At most, K-way user-item preference
+\item At most, K-way  a user can trust another user
+\item These K latent features are same for both the domains since they are decomposed together
+\end{itemize}
 
 \section{Evaluation}
 We used the Epinions dataset, which includes 7073 users who rated a total of 139,738 different items. In our experiments, we merged the ratings and trust matrices before running the matrix factorization technique. We have set the latent feature value, K = 25. In order to evaluate the result we used two performance metrics, Root Mean Squared-Error (RMSE) and Item Coverage. Both of the performance metrics we only used on the user-item part of the final matrix, since the user-user trust part of the final matrix is usually considered as a resultant of TrusTem.
@@ -104,6 +109,18 @@ As shown in the table, TrusTem has better item coverage than the other models. T
 \section{Conclusions}
 In this report, we defined a new problem: in trust-based recommender systems, trust disjointedness is one of the reasons behind item coverage reduction. In order to address this problem we devised a new solution model, based on merging user-item rating and user-user trust domains. Then, we employ matrix factorization to recommend items. We discussed how trust in the merged matrix propagates to recommend items to users belong to different subgraphs. 
 Experiments on real life dataset from Epinions.com demonstrate that TrusTem outperforms existing methods for item coverage. However, it trades off rating accuracy to achieve that. This work suggests several directions for future work. Since items and users are represented in the same latent feature space, it implicitly describes the trust information based on several features. This gives us a notion that trust can be granularized into further details, which may improve the overall accuracy of the system. 
+
+
+\begin{enumerate}
+\item N. E. Friedkin. (1998) A Structural Theory of Social Influence. Cambridge University Press.
+\item Andersen, R., Borgs, C., Chayes, J., Feige, U., Flaxman, A., Kalai, A., ...  Tennenholtz, M. (2008). Trust-based recommendation systems: an axiomatic approach. In Proceedings of the 17th international conference on World Wide Web (pp. 199-208). ACM.
+\item Y. Koren, R. Bell, and C. Volinsky. Matrix factorization techniques for recommender systems. IEEE Computer, 42:30–37, 2009.
+\item P. Massa and P. Avesani. Trust-aware recommender systems. In ACM Recommender Systems Conference (RecSys), USA, 2007.
+\item J. Golbeck. Computing and Applying Trust in Web-based Social Networks. PhD thesis, University of Maryland College Park, 2005.
+\item Jamali, M.,  Ester, M. (2009, June). Trustwalker: a random walk model for combining trust-based and item-based recommendation. In Proceedings of the 15th ACM SIGKDD international conference on Knowledge discovery and data mining (pp. 397-406). ACM.
+\item Jamali, M.,  Ester, M. (2010, September). A matrix factorization technique with trust propagation for recommendation in social networks. In Proceedings of the fourth ACM conference on Recommender systems (pp. 135-142). ACM.
+
+\end{enumerate}
 
 \bibliographystyle{IEEEtran}   
 % refs.bib: should contain all references. One bib file that rules them all :)

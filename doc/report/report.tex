@@ -29,6 +29,8 @@
 \usepackage{cleveref} % multi-label ref
 
 
+\newcommand\Mark[1]{\textsuperscript{#1}}
+
 \input{./macros}   % some pre-defined macros, originally from nsl
 \input{./my_defs}   % some definitions
 \input{./alg_patch} % adds vertical line to algorithmic environment, comment this line if the vertical lines are not required
@@ -42,19 +44,23 @@
 \begin{document}
 \title{TrusTem: Recommendation in Disjoint Trust Networks}
 
-\author{\IEEEauthorblockN{Syed Tanveer Jishan}
+\author{\IEEEauthorblockN{Syed Tanveer Jishan\Mark{$\dagger$}}
 \IEEEauthorblockA{Presentation ID 9\\
 Student ID 301279717\\
 sjishan@sfu.ca}
 \and
-\IEEEauthorblockN{ Khaled Diab}
+\IEEEauthorblockN{Khaled Diab\Mark{$\dagger$}}
 \IEEEauthorblockA{Presentation ID 5\\
 Student ID 301235653\\
-kdiab@sfu.ca}
+kdiab@sfu.ca}\\
 }
 
 \maketitle
-
+\vspace{-0.5in}
+\begin{center}
+\Mark{$\dagger$} Both students contribute to this project with same amount of time and effort. 
+\end{center}
+\vspace{0.2in}
 \begin{abstract}
 Collaborative filtering (CF) based recommender systems suggest items to users by employing a similarity metric. With the introduction of online social networks, graph-based approach of recommendation has emerged. This approach assumes trust among users and recommends items based on trust. Although it solves cold start problem in recommendation system, user-item coverage decreases. We argue that one of the causes of coverage issue is the disjointedness of trust network, therefore, an item not rated by anyone in a subgraph cannot be recommended to any user in that subgraph. To solve this problem, we propose TrusTem: a recommendation algorithm that merges user-item and trust domains. We have conducted experiments on real-life dataset and compared TrusTem against state-of-art algorithms. Our experiments demonstrate that TrusTem covers $99.8\%$ of user-item pairs, at cost of reducing accuracy up to $8\%$. However, we show numerically that TrusTem does better coverage-accuracy trade-off than these algorithms.
 \end{abstract}

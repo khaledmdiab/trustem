@@ -1,0 +1,57 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{Massa:2007}
+P.~Massa and P.~Avesani, ``Trust-aware recommender systems,'' in \emph{Proc. of
+  ACM Conference on Recommender Systems (RecSys'07)}, Minneapolis, MN, USA, 10
+  2007, pp. 17--24.
+
+\bibitem{Golbeck:2005}
+J.~A. Golbeck, ``Computing and applying trust in web-based social networks,''
+  Ph.D. dissertation, College Park, MD, USA, 2005.
+
+\bibitem{Jamali:2009}
+M.~Jamali and M.~Ester, ``Trustwalker: A random walk model for combining
+  trust-based and item-based recommendation,'' in \emph{Proc. of ACM SIGKDD
+  International Conference on Knowledge Discovery and Data Mining (KDD'09)},
+  Paris, France, June 2009, pp. 397--406.
+
+\bibitem{Jamali:2010}
+------, ``A matrix factorization technique with trust propagation for
+  recommendation in social networks,'' in \emph{Proc. of ACM Conference on
+  Recommender Systems (RecSys'10)}, Barcelona, Spain, September 2010, pp.
+  135--142.
+
+\bibitem{Friedkin:1998}
+N.~E. Friedkin, \emph{{A Structural Theory of Social Influence}}.\hskip 1em
+  plus 0.5em minus 0.4em\relax Cambridge University Press, 1998.
+
+\bibitem{Andersen:2008}
+R.~Andersen, C.~Borgs, J.~Chayes, U.~Feige, A.~Flaxman, A.~Kalai, V.~Mirrokni,
+  and M.~Tennenholtz, ``Trust-based recommendation systems: An axiomatic
+  approach,'' in \emph{Proc. of International Conference on World Wide Web
+  (WWW'08)}, Beijing, China, 2008, pp. 199--208.
+
+\bibitem{Koren:2009}
+Y.~Koren, R.~Bell, and C.~Volinsky, ``Matrix factorization techniques for
+  recommender systems,'' \emph{Computer}, vol.~42, no.~8, pp. 30--37, Aug.
+  2009.
+
+\end{thebibliography}

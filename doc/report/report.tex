@@ -40,7 +40,6 @@
 \graphicspath{{figs/}}
 
 \begin{document}
-\nocite{*}
 \title{TrusTem: Recommendation in Disjoint Trust Networks}
 
 \author{\IEEEauthorblockN{Syed Tanveer Jishan}
@@ -61,22 +60,22 @@ Collaborative filtering (CF) based recommender systems suggest items to users by
 \end{abstract}
 
 \section{Introduction} \label{sec:intro}
-Personalized recommender systems predict items ratings to users based on their items preferences. With the increase in popularity of online social networks, the trust-based approach to recommendation has emerged[?,?,?,?]. In such approach, the friendship/trust network among users is taken into consideration to make recommendations. Trust information can be exploited to get rid of cold start problem, since it is assumed by the sociologists that friends (or people you trust) will have similar attributes, hence similar preferences [1]. However, recommending items that are only rated by direct trusted users can lead to item coverage issue. To put it simply, the items a target user may like but not rated by his friends will not be recommended. Therefore, recommender systems take advantage of the transitive property of the trust [2], and use trust propagation metrics to estimate trust between indirect neighbors so that more items can be covered for recommendation. 
+Personalized recommender systems predict items ratings to users based on their items preferences. With the increase in popularity of online social networks, the trust-based approach to recommendation has emerged~\cite{Massa:2007,Golbeck:2005,Jamali:2009,Jamali:2010}. In such approach, the friendship/trust network among users is taken into consideration to make recommendations. Trust information can be exploited to get rid of cold start problem, since it is assumed by the sociologists that friends (or people you trust) will have similar attributes, hence similar preferences~\cite{Friedkin:1998}. However, recommending items that are only rated by direct trusted users can lead to item coverage issue. To put it simply, the items a target user may like but not rated by his friends will not be recommended. Therefore, recommender systems take advantage of the transitive property of the trust~\cite{Andersen:2008}, and use trust propagation metrics to estimate trust between indirect neighbors so that more items can be covered for recommendation. 
 
-We argue that despite propagating trust in the trust network, there are still hindrance in the coverage of the items to be recommended, since trust networks are usually a set of \textit{disjoint} subgraphs rather than one large fully connected graph. To verify this claim, we looked into several real life datasets. For instance, we have collected trust information among $7,073$ users in Epinions.com and found that it consists of $17$ disjoint subgraphs. Clearly, trust cannot be propagated from one such subgraph to another, since there exist no edges to connect them. In such cases, if an item is not rated by any of the user within a subgraph, then it cannot be recommended to the target user belonging to that subgraph. Therefore, the issue of item coverage will persist.
+We argue that despite propagating trust in the trust network, there are still hindrance in the coverage of the items to be recommended, since trust networks are usually a set of \textit{disjoint} subgraphs rather than one large fully connected graph. To verify this claim, we looked into several real life datasets. For instance, we have collected trust information among $7,073$ users in Epinions.com and found that it consists of $17$ disjoint subgraphs. Clearly, trust cannot be propagated from one such subgraph to another, since there exist no edges to connect them. In such cases, if an item is not rated by any of the users within a subgraph, then it cannot be recommended to the target user belonging to that subgraph. Therefore, the issue of item coverage will persist.
 
-In order to propagate trust among these disjoint subgraphs, we propose a new recommender algorithm: TrusTem. TrusTem takes advantage of the transitive property of matrix factorization technique [3]. It considers trust to be in the same domain as the item ratings which results in a hybrid trust based recommender system. In such hybrid recommender system, trust propagation and ratings prediction happen simultaneously. We list the contributions of this report as follows:
+In order to propagate trust among these disjoint subgraphs, we propose a new recommender algorithm: TrusTem. TrusTem takes advantage of the transitive property of matrix factorization technique~\cite{Koren:2009}. It considers trust to be in the same domain as the item ratings which results in a hybrid trust based recommender system. In such hybrid recommender system, trust propagation and ratings prediction happen simultaneously. We list the contributions of this report as follows:
 \begin{itemize}
 \item We define a new research problem in trust-based recommendation system. That is, recommendation in disjoint trust networks.
 \item We propose a new solution (TrusTem). Our solution model is based on the idea of merging the rating and trust domains.
 \item We evaluate TrusTem using real dataset against stat-of-art trust-based recommendation algorithms. We show that TrusTem covers $99.8\%$ of user-item pairs, at cost of reducing accuracy up to $8\%$.
 \end{itemize}
 
-The report is structured as follows. Section 2 surveys trust-based recommenders systems while Section 3 defines the problem of recommendation in disjoint trust networks. Section 4 describes our solution model. We evaluate TruTem in Section 5, before concluding the report in Section 6.
+The report is structured as follows. Section 2 surveys trust-based recommenders systems. Section 3 defines the problem of recommendation in disjoint trust networks. Section 4 describes our solution model. We evaluate TruTem in Section 5, before concluding the report in Section 6.
 
 
 \section{Related Work} \label{sec:related}
-MoleTrust [?] considers rating information up to certain depth threshold. In order to propagate trust, a backward exploration is performed. It means that the trust value from user A to user B is the aggregation of trust values between the user A and every other users who directly trust B. Similar to MoleTrust, TidalTrust [?] performs graph search in the trust network to estimate trust value between two indirect neighbours. To infer the trust between two indirect neighbours, TidalTrust first finds the shortest path in the graph from a user A to every other user, then picks a user B before aggregating the trust value from every users to the user B who are direct neighbour of A. Jamali and Ester proposed TrustWalker [?], a random walk model that combines trust-based approach and item-based CF approach. Random walks are made on the trust network to infer items ratings. If the item is not found within a certain depth threshold, item rating is estimated based on similar items. SocialMF [?] is a variant of trust-based recommender system which uses probabilistic matrix factorization approach. The latent features of this model is based on the trust information. The latent feature vector of a particular user depends on the latent feature vectors of all their direct neighbours, which propagates trust recursively.
+MoleTrust~\cite{Massa:2007} considers rating information up to certain depth threshold. In order to propagate trust, a backward exploration is performed. It means that the trust value from user A to user B is the aggregation of trust values between the user A and every other users who directly trust B. Similar to MoleTrust, TidalTrust~\cite{Golbeck:2005} performs graph search in the trust network to estimate trust value between two indirect neighbours. To infer the trust between two indirect neighbours, TidalTrust first finds the shortest path in the graph from a user A to every other user, then picks a user B before aggregating the trust value from every users to the user B who are direct neighbour of A. Jamali and Ester proposed TrustWalker~\cite{Jamali:2009}, a random walk model that combines trust-based approach and item-based CF approach. Random walks are made on the trust network to infer items ratings. If the item is not found within a certain depth threshold, item rating is estimated based on similar items. SocialMF~\cite{Jamali:2010} is a variant of trust-based recommender system which uses probabilistic matrix factorization approach. The latent features of this model is based on the trust information. The latent feature vector of a particular user depends on the latent feature vectors of all their direct neighbours, which propagates trust recursively.
 
 To best of our knowledge, \textit{trust network disjointedness} is not handled previously by any recommendation algorithm. This report defines this problem and proposes a new solution model and algorithm.
 
@@ -111,7 +110,7 @@ As depicted in Figure~\ref{fig:motiv}, orange and blue nodes users have similar 
 To create such link between subgraphs, we introduce items as nodes within the original trust network. The network will no longer be trust network since there will be two different kinds of edges, user to user trust edges and user to item edges if the user rated the item. In Figure~\ref{fig:link}, it is evident that item I4 can be recommended to the blue node user, since it trusts the orange node user which is now linked to the green node user through the item nodes. 
 
 \subsection{Matrix Representation and Factorization}
-We address the problem of \textit{recommendation in disjoint trust networks} by considering a user-item and user-user matrices. This is different than some state-of-art algorithms, which adopted graph traversal techniques (such as TrustWalker[?]). We first build the two matrices using the user-item ratings and user trust information. Our model is based on merging both of the matrices as shown in Figure~\ref{fig:merge}. This indicates that trust information is considered as a rating as well.
+We address the problem of \textit{recommendation in disjoint trust networks} by considering a user-item and user-user matrices. This is different than some state-of-art algorithms, which adopted graph traversal techniques (such as TrustWalker~\cite{Jamali:2009}). We first build the two matrices using the user-item ratings and user trust information. Our model is based on merging both of the matrices as shown in Figure~\ref{fig:merge}. This indicates that trust information is considered as a rating as well.
 
 \begin{figure}[tp]
 \centering
@@ -135,7 +134,7 @@ To calculate $RMSE$, we use the dataset $D$ that we already have ratings for.
 \begin{equation}
 RMSE = \sqrt{\frac{\sum_{(u,i)\in D}\left(r_{u,i} - \widehat{r_{u,i}} \right)^2}{|D|}}
 \end{equation}
-F-measure combines both accuracy and coverage in one numeric metric. We employ the same formulas as TrustWalker[?] to calculate F-measure. First, we convert the $RMSE$ to precision using the following equation:
+F-measure combines both accuracy and coverage in one numeric metric. We employ the same formulas as TrustWalker~\cite{Jamali:2009} to calculate F-measure. First, we convert the $RMSE$ to precision using the following equation:
 \begin{equation}
 precision = 1 - \frac{RMSE}{4}
 \end{equation}
@@ -154,10 +153,10 @@ We present our experiments results and comparison against other state-of-the-art
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{Method}            & \textbf{RMSE}    & \textbf{Coverage (\%)} & \textbf{F-Measure} \\ \hline \hline
-TidalTrust[?]  & $1.096$ & $84.9$        & $0.65$    \\ \hline
-MoleTrust[?]   & $1.093$ & $82.1$        & $0.608$   \\ \hline
-TrustWalker[?] & $1.077$ & $95.4$        & $0.827$   \\ \hline
-SocialMF[?]    & $1.085$ & NA            & NA        \\ \hline
+TidalTrust~\cite{Golbeck:2005}  & $1.096$ & $84.9$        & $0.65$    \\ \hline
+MoleTrust~\cite{Massa:2007}   & $1.093$ & $82.1$        & $0.608$   \\ \hline
+TrustWalker~\cite{Jamali:2009} & $1.077$ & $95.4$        & $0.827$   \\ \hline
+SocialMF~\cite{Jamali:2010}    & $1.085$ & NA            & NA        \\ \hline
 TrusTem     & $1.172$ & $99.8$        & $0.828$   \\ \hline
 \end{tabular}
 \caption{Experimental results using Epinions.com dataset.}
@@ -169,20 +168,8 @@ As shown in the table, TrusTem has better item coverage than the other models. T
 
 \section{Conclusions}
 In this report, we defined a new problem: in trust-based recommender systems, trust disjointedness is one of the reasons behind item coverage reduction. In order to address this problem we devised a new solution model, based on merging user-item rating and user-user trust domains. Then, we employ matrix factorization to recommend items. We discussed how trust in the merged matrix propagates to recommend items to users belong to different subgraphs. 
-Experiments on real life dataset from Epinions.com demonstrate that TrusTem outperforms existing methods for item coverage. However, it trades off rating accuracy to achieve that. This work suggests several directions for future work. Since items and users are represented in the same latent feature space, it implicitly describes the trust information based on several features. This gives us a notion that trust can be granularized into further details, which may improve the overall accuracy of the system. 
+Experiments on real life dataset from Epinions.com demonstrate that TrusTem outperforms existing algorithms for item coverage and trades off rating accuracy to achieve that. Further, TrusTem exhibits better F-measure compared to these algorithms. This work suggests several directions for future work. Since items and users are represented in the same latent feature space, it implicitly describes the trust information based on several features. This gives us a notion that trust can be granularized into further details, which may improve the overall accuracy of the system. 
 
-
-\begin{enumerate}
-\item N. E. Friedkin. (1998) A Structural Theory of Social Influence. Cambridge University Press.
-\item Andersen, R., Borgs, C., Chayes, J., Feige, U., Flaxman, A., Kalai, A., ...  Tennenholtz, M. (2008). Trust-based recommendation systems: an axiomatic approach. In Proceedings of the 17th international conference on World Wide Web (pp. 199-208). ACM.
-\item Y. Koren, R. Bell, and C. Volinsky. Matrix factorization techniques for recommender systems. IEEE Computer, 42:30–37, 2009.
-\item P. Massa and P. Avesani. Trust-aware recommender systems. In ACM Recommender Systems Conference (RecSys), USA, 2007.
-\item J. Golbeck. Computing and Applying Trust in Web-based Social Networks. PhD thesis, University of Maryland College Park, 2005.
-\item Jamali, M.,  Ester, M. (2009, June). Trustwalker: a random walk model for combining trust-based and item-based recommendation. In Proceedings of the 15th ACM SIGKDD international conference on Knowledge discovery and data mining (pp. 397-406). ACM.
-\item Jamali, M.,  Ester, M. (2010, September). A matrix factorization technique with trust propagation for recommendation in social networks. In Proceedings of the fourth ACM conference on Recommender systems (pp. 135-142). ACM.
-\item https://github.com/khaledmdiab/trustem
-
-\end{enumerate}
 
 \bibliographystyle{IEEEtran}   
 % refs.bib: should contain all references. One bib file that rules them all :)

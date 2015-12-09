@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: report.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: ./refs.bib
+-- IEEEtran.bst version 1.11 (2003/04/02) by Michael Shell.
+-- http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--missing school in Golbeck:2005
+
+Done.
+You've used 7 entries,
+            3975 wiz_defined-function locations,
+            849 strings with 8479 characters,
+and the built_in function-call counts, 5263 in all, are:
+= -- 399
+> -- 117
+< -- 43
++ -- 64
+- -- 19
+* -- 258
+:= -- 775
+add.period$ -- 14
+call.type$ -- 7
+change.case$ -- 6
+chr.to.int$ -- 108
+cite$ -- 8
+duplicate$ -- 372
+empty$ -- 464
+format.name$ -- 24
+if$ -- 1212
+int.to.chr$ -- 0
+int.to.str$ -- 7
+missing$ -- 66
+newline$ -- 41
+num.names$ -- 7
+pop$ -- 162
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 398
+stack$ -- 0
+substring$ -- 258
+swap$ -- 301
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 0
+warning$ -- 1
+while$ -- 27
+width$ -- 8
+write$ -- 82
+(There was 1 warning)
